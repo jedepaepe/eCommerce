@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Sam 22 Juillet 2017 à 16:50
+-- Généré le :  Dim 23 Juillet 2017 à 21:16
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -30,6 +30,13 @@ CREATE TABLE `brand` (
   `id` int(11) NOT NULL,
   `brand` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `brand`
+--
+
+INSERT INTO `brand` (`id`, `brand`) VALUES
+(1, 'Levis');
 
 -- --------------------------------------------------------
 
@@ -75,13 +82,23 @@ INSERT INTO `categories` (`id`, `category`, `parent`) VALUES
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `price` decimal(10,0) NOT NULL,
-  `list_price` decimal(10,0) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `list_price` decimal(10,2) NOT NULL,
   `brand` int(11) NOT NULL,
   `categories` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci NOT NULL
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `featured` tinyint(4) NOT NULL DEFAULT '0',
+  `sizes` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `products`
+--
+
+INSERT INTO `products` (`id`, `title`, `price`, `list_price`, `brand`, `categories`, `image`, `description`, `featured`, `sizes`) VALUES
+(1, 'Levi\'s Jeans', '39.99', '69.99', 1, '6', '/eCommerce/images/products/men6.png', 'These jeans are amazing. They are super comfy and sexy! Buy them please.', 1, '28:3,32:5,36:1'),
+(2, 'Beautiful Shirt', '19.99', '29.99', 1, '5', '/eCommerce/images/products/men1.png', 'What a beautiful shirt. You\'ll be the one of all with it.', 1, 'small:3,medium:6,large:9');
 
 --
 -- Index pour les tables exportées
@@ -113,7 +130,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT pour la table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `categories`
 --
@@ -123,7 +140,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT pour la table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
