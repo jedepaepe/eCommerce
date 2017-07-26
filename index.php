@@ -14,6 +14,17 @@ $featured = $db->query($sql);
     <body>
         <?php include_once 'includes/navigation.php'; ?>
         <?php include_once 'includes/headerfull.php'; ?>
+        <script>
+            // manage the paralax effect of the headerfull (image)
+            "use strict";
+            jQuery(window).scroll(function() {
+                var vscroll = jQuery(this).scrollTop();
+                console.log(vscroll);
+                jQuery("#logotext").css({transform: "translate(0px, " + vscroll/2 + "px)"});
+                jQuery("#back-flower").css({transform: "translate(" + vscroll/5 + "px, -" + vscroll/12 + "px"});
+                jQuery("#fore-flower").css({transform: "translate(0px, -" + vscroll/2 + "px)"});
+            })
+        </script>
         <div class="container-fluid">
             <?php include_once 'includes/leftbar.php';?>
             <!-- contenu principal (main content) -->
@@ -26,7 +37,7 @@ $featured = $db->query($sql);
                         <img src="<?php echo $product['image']?>" alt="<?php echo $product['title']?>" class="img-thumb"/>
                         <p class="list-price text-danger">Prix Liste: <s>€<?php echo $product['list_price']?></s></p>
                         <p class="price">Notre Prix: €<?php echo $product['price']?></p>
-                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#details-1">Détails</button>
+                        <button type="button" class="btn btn-sm btn-success" onclick="detailsModal(<?php echo $product['id']?>)">Détails</button>
                     </div>
                     <?php endwhile; ?>
                 </div>
@@ -34,24 +45,20 @@ $featured = $db->query($sql);
             <?php include_once 'includes/rightbar.php'; ?>
         </div>
         <?php include_once 'includes/footer.php'; ?>
-        <?php include_once 'includes/detailsmodal.php'; ?>
-       
-        <!-- pour simuler du contenu dans la page // changez $i<0 en $i<10 pour générer 10 div -->
-        <?php for($i=0; $i<0; $i++) {?>
-        <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan et elit eu dictum. Curabitur viverra risus eget sem interdum aliquet. Curabitur sed sapien accumsan, sagittis nunc id, suscipit urna. Etiam aliquet leo quis nisi tempus sodales. Pellentesque varius purus et sodales dignissim. Nulla mattis justo a dui accumsan, vel lacinia magna egestas. Mauris euismod, leo in dignissim ultricies, tellus diam tristique sem, eu consequat ex tortor et nibh. Phasellus eu tempor libero.
-        </div>
-        <?php } ?>
-
         <script>
-            "use strict";
-            jQuery(window).scroll(function() {
-                var vscroll = jQuery(this).scrollTop();
-                console.log(vscroll);
-                jQuery("#logotext").css({transform: "translate(0px, " + vscroll/2 + "px)"});
-                jQuery("#back-flower").css({transform: "translate(" + vscroll/5 + "px, -" + vscroll/12 + "px"});
-                jQuery("#fore-flower").css({transform: "translate(0px, -" + vscroll/2 + "px)"});
-            })
+            function detailsModal(id) {
+                var data = {id: id};
+                jQuery.ajax({
+                    url: "includes/detailsmodal.php",
+                    method: "post",
+                    data: data,
+                    success: function(data){
+                        jQuery("body").append(data);
+                        jQuery("#details-modal").modal("toggle");
+                    },
+                    error: function(err) {console.log("error calling detailsModal - no server answer"); console.log(err);}
+                })
+            }
         </script>
     </body>
 </html>
