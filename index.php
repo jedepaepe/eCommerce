@@ -32,9 +32,9 @@ $featured = $db->query($sql);
                 <div class="row">
                     <h2 class="text-center">Produits Vedettes</h2>
                     <?php while($product = $featured->fetch_assoc()): ?>
-                    <div class="col-md-3">
+                    <div class="col-md-3 text-center">
                         <h4><?php echo $product['title'] ?></h4>
-                        <img src="<?php echo $product['image']?>" alt="<?php echo $product['title']?>" class="img-thumb"/>
+                        <img src="<?php echo $product['image']?>" alt="<?php echo $product['title']?>" class="img-thumb" style="margin: 0 auto;"/>
                         <p class="list-price text-danger">Prix Liste: <s>€<?php echo $product['list_price']?></s></p>
                         <p class="price">Notre Prix: €<?php echo $product['price']?></p>
                         <button type="button" class="btn btn-sm btn-success" onclick="detailsModal(<?php echo $product['id']?>)">Détails</button>
