@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mer 26 Juillet 2017 à 20:10
+-- Généré le :  Jeu 27 Juillet 2017 à 06:43
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -36,7 +36,8 @@ CREATE TABLE `brand` (
 --
 
 INSERT INTO `brand` (`id`, `brand`) VALUES
-(1, 'Levis');
+(1, 'Levis'),
+(2, 'Nike');
 
 -- --------------------------------------------------------
 
@@ -130,7 +131,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT pour la table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `categories`
 --
